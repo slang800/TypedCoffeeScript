@@ -56,3 +56,46 @@ suite 'Member Access', ->
     eq nonceA, obj['a-b']
     obj['c-d'] = nonceB
     eq nonceB, obj['c-d']
+
+  test 'indented member access', ->
+    nonce = {}
+
+    o = a: -> b: c: -> nonce
+    eq nonce, o.a().b.c()
+    eq nonce, o
+    .a()
+    .b
+    .c()
+    eq nonce, o
+      .a()
+      .b
+      .c()
+    eq nonce, o
+      .a()
+        .b
+      .c()
+    eq nonce, o
+      .a()
+        .b
+          .c()
+    eq nonce, o.a().b.c()
+
+    o = a: -> b: c: nonce
+    eq nonce, o.a().b.c
+    eq nonce, o
+    .a()
+    .b
+    .c
+    eq nonce, o
+      .a()
+      .b
+      .c
+    eq nonce, o
+      .a()
+        .b
+      .c
+    eq nonce, o
+      .a()
+        .b
+          .c
+    eq nonce, o.a().b.c

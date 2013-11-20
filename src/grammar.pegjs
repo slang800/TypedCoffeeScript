@@ -547,7 +547,7 @@ leftHandSideExpression = callExpression / newExpression
         );
       }
   argumentListContents
-    = e:argument es:(_ ("," / TERMINATOR) _ argument)* ("," / TERMINATOR)? {
+    = !IMPLEMENTS e:argument es:(_ ("," / TERMINATOR) _ argument)* ("," / TERMINATOR)? {
         return [e].concat(es.map(function(e){ return e[3]; }));
       }
     / TERMINDENT a:argumentListContents DEDENT TERMINATOR? { return a; }
@@ -732,9 +732,10 @@ try
       return r({block: body ? body.block : null});
     }
 
+classImplements = _ IMPLEMENTS __ key:ObjectInitialiserKeys _
 
 class
-  = CLASS name:(_ Assignable)? parent:(_ EXTENDS _ extendee)? body:classBody {
+  = CLASS name:(_ Assignable)? parent:(_ EXTENDS _ extendee)? impl:classImplements? body:classBody {
       var ctor = null;
       name = name ? name[1] : null;
       parent = parent ? parent[3] : null;
@@ -1276,16 +1277,17 @@ UNTIL = $("until" !identifierPart)
 WHEN = $("when" !identifierPart)
 WHILE = $("while" !identifierPart)
 YES = $("yes" !identifierPart)
+IMPLEMENTS = $("implements" !identifierPart)
 
 SharedKeywords
   = ("true" / "false" / "null" / "this" / "new" / "delete" / "typeof" /
   "instanceof" / "in" / "return" / "throw" / "break" / "continue" / "debugger" /
-  "if" / "else" / "switch" / "for" / "while" / "do" / "try" / "catch" /
+  "if" / "else" / "switch" / "for" / "while" / "do" / "try" / "catch" / "implements" /
   "finally" / "class" / "extends" / "super") !identifierPart
 
 JSKeywords
   = ("case" / "default" / "function" / "var" / "void" / "with" / "const" /
-  "let" / "enum" / "export" / "import" / "native" / "implements" / "interface" /
+  "let" / "enum" / "export" / "import" / "native" /  "interface" /
   "package" / "private" / "protected" / "public" / "static" / "yield") !identifierPart
 
 CSKeywords

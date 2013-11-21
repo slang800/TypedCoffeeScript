@@ -1,58 +1,96 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CoffeeScript Redux Online Demo</title>
-  <meta charset="UTF-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<div id="all">
-  <nav id="tabs">
-    <ul><!--
-      <li><a class="js2coffee active" href="#js2coffee">JS &rarr; Coffee</a></li>
-      <li><a class="coffee2js" href="#coffee2js">Coffee &rarr; JS</a></li>
-    --></ul>
-  </nav>
-  <div id="editors">
-    <!-- <form id="js2coffee">
-      <div class="error hide" id="js2coffee_error"></div>
-      <pre class="editor left" id="js2coffee_editor"></pre>
-      <pre class="output right" id="js2coffee_output"></pre>
-    </form> -->
-    <form id="coffee2js">
-      <div class="error hide" id="coffee2js_error"></div>
-      <pre class="editor left" id="coffee2js_editor"></pre>
-      <pre class="output right" id="coffee2js_output"></pre>
-    </form>
-  </div>
-  <p class="more-info"><a href="#info">More info &darr;</a></p>
-  <section id="info">
-  <h2>CoffeeScript Redux</h2>
-    <div class="logo"></div>
-    <article>
-      <div class="c">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>TypedCoffeeScript by mizchi</title>
+  </head>
 
-      <h3 id="information">Information</h3>
-      <p>TODO</p>
+  <body>
+    <div id="container">
+      <div class="inner">
 
-      <h3 id="installation">Installation</h3>
-      <p>TODO</p>
+        <header>
+          <h1>TypedCoffeeScript</h1>
+          <h2>CoffeeScript Compiler with Type Interfaces</h2>
+        </header>
 
-      <h3 id="usage">Usage</h3>
-      <p>TODO</p>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/mizchi/TypedCoffeeScript/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/mizchi/TypedCoffeeScript/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/mizchi/TypedCoffeeScript" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
 
+        <hr>
+
+        <section id="main_content">
+          <h2>
+<a name="concept" class="anchor" href="#concept"><span class="octicon octicon-link"></span></a>Concept</h2>
+
+<ul>
+<li>Allow to compile all coffee-script</li>
+<li>Optional type and restrict member access under definition</li>
+<li>Easy to add type to symbol from the middle of development</li>
+<li>Easy to replace coffee-script</li>
+<li>Check type againt cscodegen AST, not in compiler</li>
+</ul><h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<div class="highlight highlight-coffeescript"><pre><span class="c1"># define struct</span>
+<span class="nx">struct</span> <span class="nx">Point</span> <span class="p">{</span>
+  <span class="nx">x</span> <span class="o">::</span> <span class="nb">Number</span>
+  <span class="nx">y</span> <span class="o">::</span> <span class="nb">Number</span>
+<span class="p">}</span>
+
+<span class="c1"># structure</span>
+<span class="nx">p</span> <span class="o">::</span> <span class="nv">Point = </span><span class="p">{</span><span class="nv">x: </span><span class="mi">3</span><span class="p">,</span> <span class="nv">y: </span><span class="mi">3</span><span class="p">}</span>
+<span class="nx">line</span> <span class="o">::</span> <span class="nx">Point</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[{</span><span class="nv">x: </span><span class="mi">3</span><span class="p">,</span> <span class="nv">y: </span><span class="mi">4</span><span class="p">},</span> <span class="p">{</span><span class="nv">x: </span><span class="mi">8</span><span class="p">,</span> <span class="nv">y: </span><span class="mi">5</span><span class="p">},</span> <span class="nx">p</span><span class="p">]</span>
+
+<span class="c1"># typed function</span>
+<span class="nx">f1</span> <span class="o">::</span> <span class="nb">Number</span> <span class="nf">-&gt;</span> <span class="nb">Number</span> <span class="o">=</span> <span class="nf">(n) -&gt;</span>  <span class="nx">n</span> <span class="o">*</span> <span class="nx">n</span>
+<span class="nv">f2 = </span><span class="nf">(n :: Number) -&gt;</span>  <span class="nx">n</span> <span class="o">*</span> <span class="nx">n</span>
+
+<span class="c1"># pre-defined symbol</span>
+<span class="nx">f3</span> <span class="o">::</span> <span class="nb">Number</span> <span class="nf">-&gt;</span> <span class="nb">Number</span>
+<span class="nv">f3 = </span><span class="nf">(n) -&gt;</span>  <span class="nx">n</span> <span class="o">*</span> <span class="nx">n</span>
+
+<span class="c1"># generics</span>
+<span class="nx">struct</span> <span class="nx">Hash</span><span class="o">&lt;</span><span class="nx">K</span><span class="p">,</span> <span class="nx">V</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nx">get</span> <span class="o">::</span> <span class="nx">K</span> <span class="nf">-&gt;</span> <span class="nx">V</span>
+  <span class="nx">set</span> <span class="o">::</span> <span class="nx">K</span> <span class="o">*</span> <span class="nx">V</span> <span class="nf">-&gt;</span> <span class="p">()</span>
+<span class="p">}</span>
+<span class="nx">hash</span> <span class="o">::</span> <span class="nx">Hash</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nv">get: </span><span class="nf">(key) -&gt;</span> <span class="nx">@</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+  <span class="nv">set: </span><span class="nf">(key, val) -&gt;</span> <span class="nx">@</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">val</span>
+<span class="p">}</span>
+<span class="nx">hash</span><span class="p">.</span><span class="nx">set</span> <span class="s">"a"</span><span class="p">,</span> <span class="mi">1</span>
+<span class="nx">num</span> <span class="o">::</span> <span class="nb">Number</span> <span class="o">=</span> <span class="nx">hash</span><span class="p">.</span><span class="nx">get</span> <span class="s">"a"</span>
+
+<span class="c1"># class property field</span>
+<span class="k">class</span> <span class="nx">X</span>
+  <span class="nx">num</span> <span class="o">::</span> <span class="nb">Number</span>
+  <span class="nx">f</span> <span class="o">::</span> <span class="nb">Number</span> <span class="nf">-&gt;</span> <span class="nb">Number</span>
+  <span class="nv">f: </span><span class="nf">(n) -&gt;</span>
+    <span class="vi">@num = </span><span class="nx">n</span>
+<span class="nx">x</span> <span class="o">::</span> <span class="nv">X = </span><span class="k">new</span> <span class="nx">X</span>
+<span class="nx">x</span><span class="p">.</span><span class="nx">f</span> <span class="mi">3</span>
+</pre></div>
+        </section>
+
+        <footer>
+          TypedCoffeeScript is maintained by <a href="https://github.com/mizchi">mizchi</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
       </div>
-    </article>
-  </section>
-  <script charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
-  <script src="js/ace.js"></script>
-  <script src="js/mode-coffee.js"></script>
-  <script src="js/mode-javascript.js"></script>
-  <script src="js/theme-clouds.js"></script>
-  <script src="CoffeeScriptRedux.js"></script>
-  <script src="js/script.js"></script>
-  <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
-</div>
-</body>
+    </div>
+  </body>
 </html>

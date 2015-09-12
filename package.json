@@ -1,28 +1,19 @@
 {
   "name": "typed-coffee-script",
-  "author": "mizchi",
-  "version": "0.12.2",
-  "homepage": "https://github.com/mizchi/TypedCoffeeScript",
-  "bugs": "https://github.com/mizchi/TypedCoffeeScript/issues",
   "description": "Unfancy JavaScript with Types",
-  "keywords": [
-    "typedcoffeescript",
-    "coffeescript",
-    "javascript",
-    "language",
-    "compiler"
-  ],
-  "main": "./lib/module",
+  "version": "0.12.2",
+  "author": "mizchi",
   "bin": {
     "tcoffee": "./bin/tcoffee"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/michaelficarra/CoffeeScriptRedux.git"
-  },
-  "scripts": {
-    "build": "make -j build",
-    "test": "make -j test"
+  "bugs": "https://github.com/mizchi/TypedCoffeeScript/issues",
+  "dependencies": {
+    "StringScanner": "~0.0.3",
+    "coffee-script": "^1.7.1",
+    "colors": "^0.6.2",
+    "lodash": "^2.4.1",
+    "nopt": "~2.1.2",
+    "optimist": "^0.6.1"
   },
   "devDependencies": {
     "cluster": "~0.7.7",
@@ -33,23 +24,32 @@
     "pegjs": "git+https://github.com/dmajda/pegjs.git#bea6b1fde74c8aebf802f9bcc3380c65b241e1b7",
     "semver": "~2.1.0"
   },
-  "dependencies": {
-    "StringScanner": "~0.0.3",
-    "coffee-script": "^1.7.1",
-    "colors": "^0.6.2",
-    "lodash": "^2.4.1",
-    "nopt": "~2.1.2",
-    "optimist": "^0.6.1"
-  },
-  "optionalDependencies": {
-    "prettyjson": "*",
-    "esmangle": "~0.0.8",
-    "source-map": "0.1.11",
-    "escodegen": "~0.0.24",
-    "cscodegen": "git://github.com/michaelficarra/cscodegen.git#73fd7202ac086c26f18c9d56f025b18b3c6f5383"
-  },
   "engines": {
     "node": "0.8.x || 0.10.x"
   },
-  "license": "BSD-3-Clause"
+  "homepage": "https://github.com/mizchi/TypedCoffeeScript",
+  "keywords": [
+    "coffeescript",
+    "compiler",
+    "javascript",
+    "language",
+    "typedcoffeescript"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "./lib/module",
+  "optionalDependencies": {
+    "cscodegen": "git://github.com/michaelficarra/cscodegen.git#73fd7202ac086c26f18c9d56f025b18b3c6f5383",
+    "escodegen": "~0.0.24",
+    "esmangle": "~0.0.8",
+    "prettyjson": "*",
+    "source-map": "0.1.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/michaelficarra/CoffeeScriptRedux.git"
+  },
+  "scripts": {
+    "build": "make -j build",
+    "test": "make -j test"
+  }
 }

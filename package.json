@@ -51,11 +51,5 @@
   "engines": {
     "node": "0.8.x || 0.10.x"
   },
-  "licenses": [
-    {
-      "type": "3-clause BSD",
-      "url": "https://raw.github.com/michaelficarra/CoffeeScriptRedux/master/LICENSE"
-    }
-  ],
-  "license": "3-clause BSD"
+  "license": "BSD-3-Clause"
 }

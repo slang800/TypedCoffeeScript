@@ -119,7 +119,7 @@ suite 'Range Literals', ->
     eq [3..1].toString(), "3,2,1"
     eq [1..4].toString(), "1,2,3,4"
     eq [4..1].toString(), "4,3,2,1"
-    
+
     eq [1...3].toString(), "1,2"
     eq [3...1].toString(), "3,2"
     eq [1...4].toString(), "1,2,3"
